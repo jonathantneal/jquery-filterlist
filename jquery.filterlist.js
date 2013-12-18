@@ -45,11 +45,13 @@
 			if (type === 'checked' && input.checked) collection.push({
 				input: input,
 				type: type,
-				value: input.getAttribute('title') || input.getAttribute('data-title') || (document.querySelector('label[for="' + input.id + '"]') || (function (element) {
+				value: input.getAttribute('title') || input.getAttribute('data-title') || (function () {
+					var element = document.querySelector('label[for="' + input.id + '"]') || input;
+
 					while (element && element.nodeName !== 'LABEL') element = element.parentNode;
 
 					return element ? element.innerText || element.textContent : null;
-				})(input)) || input.value
+				})() || input.value
 			});
 
 			else if (type === 'selected') {
@@ -60,7 +62,7 @@
 						input: input,
 						option: option,
 						type: type,
-						value: option.getAttribute('title') || option.text || option.value
+						value: option.getAttribute('title') || option.getAttribute('data-title') || option.text || option.value
 					});
 				});
 			}
