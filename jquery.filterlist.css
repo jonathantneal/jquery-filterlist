@@ -1,0 +1,38 @@
+.filterlist-list {
+	color: #333;
+	font-size: 75%;
+}
+
+.filterlist-item {
+	border: 1px solid #DDD;
+	border-radius: 1.5em;
+	cursor: default;
+	display: inline-block;
+	margin: 0.3125em;
+	padding: 0.25em 0.75em;
+	vertical-align: top;
+}
+
+.filterlist-item-delete {
+	color: #DDD;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 0;
+	outline: 0;
+	text-align: center;
+}
+
+.filterlist-item-delete:before {
+	content: "\00D7";
+	font: 700 14px/1.44 sans-serif;
+	margin-left: 0.375em;
+	width: 1em;
+}
+
+.filterlist-item-delete:focus, .filterlist-item-delete:hover {
+	color: #555;
+}
+
+.filterlist-item-delete:active {
+	color: #000;
+}
