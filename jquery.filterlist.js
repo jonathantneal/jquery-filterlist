@@ -3,29 +3,25 @@
 	/* global $ */
 	'use strict';
 
-	var
-	// cache namespace
-	namespace = 'filterlist';
-
 	// initialize element as filterlist
-	function init(element) {
+	function init(element, settings) {
 		var
 		// get inputs
-		$inputs = $('.' + namespace + '-input', element),
+		$inputs = $(settings.input, element),
 		// get lists
-		$list = $('<ul class="' + namespace + '-list">').appendTo($('.' + namespace + '-filters', element));
+		$list = $('<ul class="' + settings.classList.list + '">').appendTo($(settings.output, element));
 
 		// update
-		update($inputs, $list);
+		update($inputs, $list, settings);
 
 		// update on input changes
 		$inputs.on('change', function () {
-			update($inputs, $list);
+			update($inputs, $list, settings);
 		});
 	}
 
 	// update inputs and lists
-	function update($inputs, $list) {
+	function update($inputs, $list, settings) {
 		var
 		// initialize collection
 		collection = [];
@@ -95,9 +91,9 @@
 				listitemDelete = listitem.appendChild(document.createElement('span'));
 
 				// configure item
-				listitem.setAttribute('class', namespace + '-item');
-				listitemText.setAttribute('class', namespace + '-item-text');
-				listitemDelete.setAttribute('class', namespace + '-item-delete');
+				listitem.setAttribute('class', settings.classList.item);
+				listitemText.setAttribute('class', settings.classList.itemText);
+				listitemDelete.setAttribute('class', settings.classList.itemDelete);
 				listitemDelete.setAttribute('tabindex', '0');
 				listitemDelete.setAttribute('title', 'Remove item');
 
@@ -159,11 +155,27 @@
 		});
 	}
 
-	$.fn.filterlist = function () {
+	function filterlist(optionalSettings) {
+		/* jshint validthis:true */
+		var settings = $.extend({}, filterlist.defaults, typeof optionalSettings === 'object' ? optionalSettings : {});
+
 		// initialize all elements as filterlists
-		for (var all = this, index = 0, length = all.length; index < length; ++index) init(all[index]);
+		for (var all = this, index = 0, length = all.length; index < length; ++index) init(all[index], settings);
 
 		// return chainable this
 		return all;
+	}
+
+	filterlist.defaults = {
+		classList: {
+			list: 'filterlist-list',
+			item: 'filterlist-item',
+			itemText: 'filterlist-item-text',
+			itemDelete: 'filterlist-item-delete'
+		},
+		input: '.filterlist-input',
+		output: '.filterlist-filters'
 	};
+
+	$.fn.filterlist = filterlist;
 })();
