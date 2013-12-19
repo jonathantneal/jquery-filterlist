@@ -38,7 +38,7 @@
 			type = input.type === 'checkbox' || input.type === 'radio' ? 'checked' : input.type === 'select-one' || input.type === 'select-multiple' ? 'selected' : 'value' in input ? 'value' : 'node';
 
 			// if checked, push to collection
-			if (type === 'checked' && input.checked) collection.push({
+			if (type === 'checked' && input.checked && input.value) collection.push({
 				input: input,
 				type: type,
 				value: input.getAttribute('title') || input.getAttribute('data-title') || (function () {
@@ -54,7 +54,7 @@
 				// process all options
 				$.each(input.options, function (optionIndex, option) {
 					// if selected, push to collection
-					if (option.selected) collection.push({
+					if (option.selected && option.value) collection.push({
 						input: input,
 						option: option,
 						type: type,
