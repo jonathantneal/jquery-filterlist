@@ -88,19 +88,19 @@
 				// create item
 				listitem = document.createElement('li'),
 				listitemText = listitem.appendChild(document.createElement('span')),
-				listitemDelete = listitem.appendChild(document.createElement('span'));
+				listitemRemove = listitem.appendChild(document.createElement('span'));
 
 				// configure item
 				listitem.setAttribute('class', settings.classList.item);
 				listitemText.setAttribute('class', settings.classList.itemText);
-				listitemDelete.setAttribute('class', settings.classList.itemDelete);
-				listitemDelete.setAttribute('tabindex', '0');
-				listitemDelete.setAttribute('title', 'Remove item');
+				listitemRemove.setAttribute('class', settings.classList.itemRemove);
+				listitemRemove.setAttribute('tabindex', '0');
+				listitemRemove.setAttribute('title', 'Remove item');
 
 				listitemText.appendChild(document.createTextNode(item.value));
 
 				// item mouse and keyboard controls
-				listitemDelete.onclick = listitemDelete.onkeydown = function () {
+				listitemRemove.onclick = listitemRemove.onkeydown = function () {
 					var
 					// detect event details
 					event = arguments[0] || window.event,
@@ -113,7 +113,7 @@
 					// on keyboard next
 					isNext = event.keyCode === 39 || event.keyCode == 40;
 
-					// if delete
+					// if remove
 					if (isClick || isEnter) {
 						if (item.type === 'checked') {
 							// uncheck input
@@ -157,7 +157,7 @@
 
 	function filterlist(optionalSettings) {
 		/* jshint validthis:true */
-		var settings = $.extend({}, filterlist.defaults, typeof optionalSettings === 'object' ? optionalSettings : {});
+		var settings = $.extend(true, {}, filterlist.defaults, typeof optionalSettings === 'object' ? optionalSettings : {});
 
 		// initialize all elements as filterlists
 		for (var all = this, index = 0, length = all.length; index < length; ++index) init(all[index], settings);
@@ -171,7 +171,7 @@
 			list: 'filterlist-list',
 			item: 'filterlist-item',
 			itemText: 'filterlist-item-text',
-			itemDelete: 'filterlist-item-delete'
+			itemRemove: 'filterlist-item-remove'
 		},
 		input: '.filterlist-input',
 		output: '.filterlist-filters'

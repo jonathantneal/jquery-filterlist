@@ -1,6 +1,9 @@
 .filterlist-list {
 	color: #333;
 	font-size: 75%;
+	list-style: none;
+	padding: 0;
+	line-height: 1;
 }
 
 .filterlist-item {
@@ -13,7 +16,7 @@
 	vertical-align: top;
 }
 
-.filterlist-item-delete {
+.filterlist-item-remove {
 	color: #DDD;
 	cursor: pointer;
 	display: inline-block;
@@ -22,17 +25,17 @@
 	text-align: center;
 }
 
-.filterlist-item-delete:before {
+.filterlist-item-remove:before {
 	content: "\00D7";
 	font: 700 14px/1.44 sans-serif;
 	margin-left: 0.375em;
 	width: 1em;
 }
 
-.filterlist-item-delete:focus, .filterlist-item-delete:hover {
+.filterlist-item-remove:focus, .filterlist-item-remove:hover {
 	color: #555;
 }
 
-.filterlist-item-delete:active {
+.filterlist-item-remove:active {
 	color: #000;
 }
